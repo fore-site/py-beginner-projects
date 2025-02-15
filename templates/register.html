@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends "header.html" %} {% block title %}Register{% endblock %}
+    <!-- <head>
+        {% block title %} Register {% endblock %} {%include 'navbar.html' %}
+    </head> -->
+    <body>
+        {% block content %}
+        <form action="{{url_for('')}}" method="post">
+            <input type="email" name="email" />
+            <input type="password" name="password" />
+            <input type="submit" value="Register" />
+        </form>
+        {% include 'footer.html' %} {% endblock %}
+    </body>
+</html>

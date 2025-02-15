@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends "header.html" %} {% block title %}Edit Post{% endblock %}
+    <body>
+        {% block content %}
+        <!-- Page Header-->
+        <header
+            class="masthead"
+            style="background-image: url('static/assets/img/contact-bg.jpg')"
+        >
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Edit Post</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <form
+            id="createPost"
+            action="{{url_for('new_route', num=num)}}"
+            method="post"
+        >
+            <div class="form-floating">
+                <input
+                    class="form-control"
+                    id="name"
+                    value="{{post.title}}"
+                    type="text"
+                    name="name"
+                    placeholder="Enter title..."
+                />
+                <label for="name">Title</label>
+            </div>
+            <div class="form-floating">
+                <input
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="{{post.author}}"
+                    type="text"
+                    placeholder="Enter author..."
+                />
+                <label for="email">Author</label>
+            </div>
+            <div class="form-floating">
+                <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    placeholder="Enter content..."
+                    style="height: 12rem"
+                >
+{{post.text}}</textarea
+                >
+                <label for="message">Text</label>
+                <div class="invalid-feedback">A message is required.</div>
+            </div>
+            <br />
+            <!-- Submit success message-->
+            <!---->
+            <!-- This is what your users will see when the form-->
+            <!-- has successfully submitted-->
+            <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">
+                    <div class="fw-bolder">
+                        You have successfully created a post!
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">
+                    Error sending message!
+                </div>
+            </div>
+            <!-- Submit Button-->
+            <button
+                class="btn btn-primary text-uppercase"
+                id="submitButton"
+                type="submit"
+            >
+                Edit Post
+            </button>
+        </form>
+        {%include "footer.html" %} {% endblock %}
+    </body>
+</html>
