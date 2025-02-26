@@ -15,7 +15,7 @@ from flask_ckeditor import CKEditor
 import os
 from dotenv import load_dotenv
 
-load_dotenv("secrets.env")
+load_dotenv(".env")
 
 login_manager = LoginManager()
 
