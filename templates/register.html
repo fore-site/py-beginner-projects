@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% extends "header.html" %} {% block title %}Register{% endblock %}
-    <!-- <head>
-        {% block title %} Register {% endblock %} {%include 'navbar.html' %}
-    </head> -->
+    {% extends "header.html" %} {% block title %}Register{% endblock %} {% block
+    create %} {% if user.id %}
+    <li class="nav-item">
+        <a
+            class="nav-link px-lg-3 py-3 py-lg-4"
+            href="{{ url_for('new_post') }}"
+            >Create Post</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}"
+            >Logout</a
+        >
+    </li>
+    {% endif %} {% if not user.id %}
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}"
+            >Login</a
+        >
+    </li>
+    {% endif %} {%endblock%}
     <body>
         {% block content %}
-        <form action="{{url_for('')}}" method="post">
-            <input type="email" name="email" />
-            <input type="password" name="password" />
+        <header
+            class="masthead"
+            style="background-image: url('static/assets/img/about-bg.jpg')"
+        >
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Register</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+            {% for msg in messages %}
+            <li>{{msg}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+        <form action="{{url_for('register')}}" method="post">
+            <label for="">Email</label> <br />
+            <input type="email" name="email" /> <br />
+            <label for="">Password</label> <br />
+            <input type="password" name="password" /> <br />
             <input type="submit" value="Register" />
         </form>
         {% include 'footer.html' %} {% endblock %}

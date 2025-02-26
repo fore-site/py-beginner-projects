@@ -1,7 +1,32 @@
 <html lang="en">
-    {% extends "header.html" %} {% block title %}Post{% endblock %}
+    {% extends "header.html" %} {% block title %}Post{% endblock %} {% block
+    create %} {% if user.id %}
+    <li class="nav-item">
+        <a
+            class="nav-link px-lg-3 py-3 py-lg-4"
+            href="{{ url_for('new_post') }}"
+            >Create Post</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}"
+            >Logout</a
+        >
+    </li>
+    {% endif %} {% if not user.id %}
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{url_for('register')}}"
+            >Register</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}"
+            >Login</a
+        >
+    </li>
+    {% endif %} {%endblock%}
     <body>
-        {% block content %}
+        {{ ckeditor.load()}} {% block content %}
         <!-- Page Header-->
         <header
             class="masthead"
@@ -30,13 +55,28 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         {% for text in texts %}
                         <p>{{text}}</p>
-                        {%endfor%}
+                        {%endfor%} {% if user.id == 1 or user.id ==
+                        post["user_id"] %}
                         <a href="{{url_for('edit_post', num=route_no)}}"
                             >Edit Post</a
                         >
                         <a href="{{url_for('delete_post', num=route_no)}}"
                             >Delete Post</a
                         >
+                        {% endif %} {%if user.id %}
+                        <form
+                            action="{{url_for('post', num=route_no)}}"
+                            method="post"
+                        >
+                            {{ ckeditor.create(value="Enter a comment") }}
+                            <br />
+                            <input type="submit" />
+                        </form>
+                        {% endif %} {%if data %} {% for comment in data %}
+                        <p>{{ comment.comment }}</p>
+                        <p>comment by {{user.email}}</p>
+                        <hr />
+                        {% endfor %} {% endif %}
                     </div>
                 </div>
             </div>

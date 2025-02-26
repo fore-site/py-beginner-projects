@@ -1,5 +1,23 @@
 <html lang="en">
-    {% extends "header.html" %} {% block title %}Create Post{% endblock %}
+    {% extends "header.html" %} {% block title %}Create Post{% endblock %} {%
+    block create %} {% if user.id %}
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}"
+            >Logout</a
+        >
+    </li>
+    {% endif %} {% if not user.id %}
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{url_for('register')}}"
+            >Register</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}"
+            >Login</a
+        >
+    </li>
+    {% endif %} {%endblock%}
     <body>
         {% block content %}
         <!-- Page Header-->
@@ -28,17 +46,6 @@
                 />
                 <label for="name">Title</label>
                 <div class="invalid-feedback">A title is required.</div>
-            </div>
-            <div class="form-floating">
-                <input
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    type="text"
-                    placeholder="Enter author..."
-                />
-                <label for="email">Author</label>
-                <div class="invalid-feedback">An author is required.</div>
             </div>
             <div class="form-floating">
                 <textarea

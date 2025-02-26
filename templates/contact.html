@@ -1,5 +1,30 @@
 <html lang="en">
-    {% extends "header.html" %} {% block title %}Contact{% endblock %}
+    {% extends "header.html" %} {% block title %}Contact{% endblock %} {% block
+    create %} {% if user.id %}
+    <li class="nav-item">
+        <a
+            class="nav-link px-lg-3 py-3 py-lg-4"
+            href="{{ url_for('new_post') }}"
+            >Create Post</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}"
+            >Logout</a
+        >
+    </li>
+    {% endif %} {% if not user.id %}
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{url_for('register')}}"
+            >Register</a
+        >
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}"
+            >Login</a
+        >
+    </li>
+    {% endif %} {%endblock%}
     <body>
         {% block content %}
         <!-- Page Header-->
